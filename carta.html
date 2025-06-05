@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Valentina</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: url('img/val.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Courier New', Courier, monospace;
+      color: #d0eaff;
+    }
+
+    #bienvenida {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    #texto {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      display: none;
+      white-space: pre-wrap;
+      line-height: 1.8;
+      background: rgba(0, 0, 0, 0.4); 
+      backdrop-filter: blur(8px);      
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .line {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 16px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #00ffcc;
+      border: 2px solid #00ffcc;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00ffcc;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="bienvenida">
+    <button onclick="iniciar()">✨ Para ti ✨</button>
+  </div>
+
+  <div id="texto"></div>
+
+  <audio id="musica" src="audio/Evangeline.mp3" loop></audio>
+
+  <script>
+    const texto = [
+      "Dedicado a Valentina",
+      "",
+      "Esta página web es una de las primeras pruebas de un proyecto personal que nace desde el fondo de mi corazón. Más allá de su propósito técnico, este espacio está dedicado a una persona muy especial en mi vida: mi mejor amiga. Una mujer digna de admiración, cuya fortaleza, resiliencia y autenticidad han dejado una huella profunda en mi forma de ver el mundo.",
+      "",
+      "Valentina no es solo una amiga. Es una inspiración constante. En lo personal, la admiro profundamente. Me ha mostrado, con hechos y no palabras, lo que realmente significa tocar fondo, enfrentarse a las propias sombras y levantarse con valentía, sin rendirse jamás. Recuerdo que alguna vez fui yo quien le ofrecía consejos y palabras de aliento. Hoy, sin embargo, soy yo quien sigue su ejemplo, aprendiendo de su temple, de su manera de encarar la vida con determinación y dignidad.",
+      "",
+      "Reconozco que en algún momento le causé daño, y asumo esa responsabilidad con humildad. Pero es justamente por eso que esta dedicación tiene tanto valor para mí. Es una forma de agradecerle, de rendir homenaje a su presencia constante, a su apoyo silencioso, a su cariño que trasciende la distancia.",
+      "",
+      "Ella ha estado presente incluso en los momentos en que otras personas decidieron alejarse. Desde la distancia, se hizo sentir con más fuerza que muchos que estaban cerca. Sus bromas, sus ideas, su voz —única e inconfundible— han sido un refugio en tiempos difíciles. Valentina es de esas personas que no se encuentran fácilmente. Es única, con una luz propia que brilla incluso en los días más oscuros.",
+      "",
+      "Esta página es mi pequeño tributo a ella. Porque Valentina me enseñó que la vida no se trata solo de llegar a la cima, sino también de saber mantenerse firme cuando las cosas se desmoronan.",
+      "",
+      "Ojalá que quien algún día navegue por este portafolio, pueda percibir entre líneas lo maravillosa que es esta persona.",
+      "",
+      "Con profunda admiración y gratitud,",
+      "Att. Sentinela"
+    ];
+
+    const contenedorTexto = document.getElementById('texto');
+    const musica = document.getElementById('musica');
+
+    function iniciar() {
+      document.getElementById('bienvenida').style.display = 'none';
+      contenedorTexto.style.display = 'block';
+      musica.play();
+      mostrarTexto(0);
+    }
+
+    function mostrarTexto(index) {
+      if (index < texto.length) {
+        const linea = texto[index];
+        const p = document.createElement("p");
+        p.className = "line";
+        contenedorTexto.appendChild(p);
+
+        let letra = 0;
+        function escribir() {
+          if (letra <= linea.length) {
+            p.textContent = linea.substring(0, letra);
+            letra++;
+            setTimeout(escribir, 20);
+          } else {
+            setTimeout(() => mostrarTexto(index + 1), 400);
+          }
+        }
+        escribir();
+      }
+    }
+  </script>
+</body>
+</html>
